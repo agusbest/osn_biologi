@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.laravel-skeleton/
+backend/vendor/
+backend/.env
+backend/storage/*.key
+backend/public/storage
+backend/public/hot
+backend/database/*.sqlite
+backend/storage/app/backups/
+frontend/.env.local
+.DS_Store
+
+# Env & rahasia: hanya *.env.example yang boleh masuk repo
+.env
+.env.*
+!.env.example
+*/.env
+*/.env.*
+!*/.env.example
+test-out*.txt
+*.log

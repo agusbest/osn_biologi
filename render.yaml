@@ -1,0 +1,66 @@
+# Render Blueprint — backend Laravel (Docker). Frontend di Vercel, database di Neon (PostgreSQL).
+# Dipakai lewat: Render Dashboard > New > Blueprint > pilih repo ini.
+services:
+  - type: web
+    name: osn-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: singapore
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: OSN Biology Academy
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: warning
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_SSLMODE
+        value: require
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: MAIL_MAILER
+        value: log
+      - key: RUN_MIGRATIONS
+        value: "true"
+      - key: RUN_SEED
+        value: "false"          # ubah ke true SEKALI pada deploy pertama, lalu kembalikan ke false
+      - key: SEED_SAMPLE_CONTENT
+        value: "true"
+      # --- Isi manual di dashboard Render (sync: false = tidak disimpan di repo) ---
+      - key: APP_KEY
+        sync: false             # php artisan key:generate --show
+      - key: APP_URL
+        sync: false             # mis. https://osn-api.onrender.com
+      - key: FRONTEND_URL
+        sync: false             # mis. https://osn-academy.vercel.app
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false             # sama dengan URL Vercel, tanpa slash di akhir
+      - key: DB_HOST
+        sync: false             # host Neon (tanpa -pooler untuk migrasi)
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false             # minimal 12 karakter
+      - key: ADMIN_NAME
+        value: Admin

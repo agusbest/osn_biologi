@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/source-serif-4";
+@import "katex/dist/katex.min.css";
+
+@theme {
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4 Variable", Georgia, serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-on-brand: var(--on-brand);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+}
+
+:root {
+  --paper: #f3f8f6;
+  --surface: #ffffff;
+  --sunken: #e8f1ee;
+  --ink: #0c2a28;
+  --muted: #4d6764;
+  --line: #cfe0db;
+  --brand: #0d7a6e;
+  --brand-strong: #095c53;
+  --brand-soft: #d9efe9;
+  --on-brand: #ffffff;
+  --amber: #a85f00;
+  --amber-soft: #fdeccd;
+  --danger: #b4281f;
+  --danger-soft: #fde4e1;
+  --ok: #17683a;
+  --ok-soft: #dcf3e4;
+  color-scheme: light;
+}
+:root.dark {
+  --paper: #0a1b1a;
+  --surface: #112a28;
+  --sunken: #0d2221;
+  --ink: #e6f3f0;
+  --muted: #9bb8b3;
+  --line: #24433f;
+  --brand: #3fc3b0;
+  --brand-strong: #7fe0d0;
+  --brand-soft: #123a36;
+  --on-brand: #04201d;
+  --amber: #f0b45a;
+  --amber-soft: #3a2a0c;
+  --danger: #ff8a80;
+  --danger-soft: #3d1816;
+  --ok: #6fdc97;
+  --ok-soft: #12351f;
+  color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Teks panjang (materi, soal, pembahasan): serif, lebar baris terkendali. */
+.prose-bio { font-family: var(--font-serif); font-size: 1.0625rem; line-height: 1.75; max-width: 68ch; }
+.prose-bio > * + * { margin-top: 0.9em; }
+.prose-bio h2, .prose-bio h3, .prose-bio h4 { font-family: var(--font-sans); font-weight: 650; line-height: 1.25; margin-top: 1.6em; }
+.prose-bio h2 { font-size: 1.4rem; } .prose-bio h3 { font-size: 1.15rem; } .prose-bio h4 { font-size: 1rem; }
+.prose-bio ul { list-style: disc; padding-left: 1.4em; }
+.prose-bio ol { list-style: decimal; padding-left: 1.5em; }
+.prose-bio li + li { margin-top: 0.3em; }
+.prose-bio a { color: var(--brand-strong); text-decoration: underline; text-underline-offset: 3px; }
+.prose-bio blockquote { border-left: 4px solid var(--brand); background: var(--brand-soft); padding: 0.6em 1em; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+.prose-bio img { max-width: 100%; height: auto; border-radius: 10px; }
+.prose-bio table { border-collapse: collapse; width: 100%; font-size: 0.95em; }
+.prose-bio th, .prose-bio td { border: 1px solid var(--line); padding: 0.4em 0.6em; text-align: left; }
+.prose-bio code { font-family: ui-monospace, monospace; background: var(--sunken); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+.prose-bio .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2em 0; }
+
+/* Editor admin */
+.editor-area .ProseMirror { min-height: 9rem; padding: 0.75rem; outline: none; font-family: var(--font-serif); line-height: 1.7; }
+.editor-area .ProseMirror > * + * { margin-top: 0.7em; }
+.editor-area .ProseMirror ul { list-style: disc; padding-left: 1.4em; }
+.editor-area .ProseMirror ol { list-style: decimal; padding-left: 1.5em; }
+.editor-area .ProseMirror h2 { font-size: 1.3rem; font-weight: 650; }
+.editor-area .ProseMirror h3 { font-size: 1.1rem; font-weight: 650; }
+.editor-area .ProseMirror blockquote { border-left: 4px solid var(--brand); padding-left: 0.8em; color: var(--muted); }
+.editor-area .ProseMirror img { max-width: 100%; }
+
+@keyframes draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.draw-once { stroke-dasharray: var(--len); animation: draw 1.6s ease-out 0.2s both; }
